@@ -1,0 +1,25 @@
+{
+  "name": "im",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DahengZhang/im.git"
+  },
+  "keywords": [
+    "IM"
+  ],
+  "author": "DahengZhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DahengZhang/im/issues"
+  },
+  "homepage": "https://github.com/DahengZhang/im#readme",
+  "dependencies": {
+    "ws": "^5.1.1"
+  }
+}

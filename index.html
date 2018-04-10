@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>IM</title>
+</head>
+<body>
+  <input id="user" type="text" value="18014938121">
+  <input id="bind" type="submit" value="绑定用户">
+  <input type="text" id="target">
+  <div id="app"></div>
+  <input type="text" id="input">
+  <input type="submit" value="发送" id="send">
+  <script>
+    const userEl = document.getElementById('user')
+    const bindEl = document.getElementById('bind')
+    const targetEl = document.getElementById('target')
+    const appEl = document.getElementById('app')
+    const inputEl = document.getElementById('input')
+    const sendEl = document.getElementById('send')
+    let ws = null
+
+    bindEl.onclick = function () {
+      if (ws) {
+        ws.close()
+      }
+      ws = new WebSocket('ws://localhost', userEl.value)
+      ws.onopen = function (e) {
+        appendChild(userEl.value + '链接成功')
+      }
+      ws.onmessage = function (msg) {
+        appendChild(msg.data)
+      }
+      ws.onclose = function() {
+        appendChild('链接断开')
+      }
+    }
+    function appendChild (msg) {
+      const pEl = document.createElement('p')
+      const pText=document.createTextNode('收到消息: ' + msg)
+      pEl.appendChild(pText)
+      appEl.appendChild(pEl)
+    }
+    sendEl.onclick = function () {
+      if (!ws) {
+        alert('尚未登录')
+        return
+      }
+      ws.send(JSON.stringify({
+        target: targetEl.value,
+        content: inputEl.value,
+        type: 0
+      }))
+      inputEl.value = ''
+    }
+  </script>
+</body>
+</html>
